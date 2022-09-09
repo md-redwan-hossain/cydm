@@ -24,6 +24,8 @@
 
 **After ensuring python in your system, follow the following steps:**
 
+- Clone the repo or download the source codes.
+
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
 - Then run CYDL by this command: `python3 cydl.py`
