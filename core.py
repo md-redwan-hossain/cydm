@@ -5,7 +5,7 @@ from timeConverter import *
 
 
 def again(stream, path):
-    print("\nDownload complete")
+    print(colored.green("\nDownload complete"))
     againDownloadChoice = str(
         input("Do you want to download another video? (y/n) "))
     if againDownloadChoice == "y" or againDownloadChoice == "Y":
@@ -36,8 +36,8 @@ def downloaderFunc(video_link):
 
     if downloadChoice == "y" or downloadChoice == "Y":
         print(colored.yellow("Downloading..."))
-        downloaderFuncownloader = yt.streams.get_highest_resolution()
-        downloaderFuncownloader.download("./downloads")
+        downloadProcessor = yt.streams.get_highest_resolution()
+        downloadProcessor.download("./downloads")
         return True
     elif downloadChoice == "n" or downloadChoice == "N":
         return False
