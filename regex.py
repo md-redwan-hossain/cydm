@@ -13,12 +13,12 @@ def validateYoutubeLink(url):
 
 
 def regexCheck():
-    link = str(input(colored.yellow("Input the youtube video link: ")))
+    link = str(input("Input the youtube video link: "))
     if validateYoutubeLink(link):
         return link
     else:
         print(colored.red("Link invalid"))
-        choice = str(input(colored.yellow("Do you want to try again? (y/n) ")))
+        choice = str(input("Do you want to try again? (y/n) "))
         if choice == "y" or choice == "Y":
             catch = regexCheck()
             return catch

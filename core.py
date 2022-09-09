@@ -7,7 +7,7 @@ from timeConverter import *
 def again(stream, path):
     print("\nDownload complete")
     againDownloadChoice = str(
-        input(colored.yellow("Do you want to download another video? (y/n) ")))
+        input("Do you want to download another video? (y/n) "))
     if againDownloadChoice == "y" or againDownloadChoice == "Y":
         linkCheck = regexCheck()
         if linkCheck:
@@ -25,14 +25,14 @@ def downloaderFunc(video_link):
     print(colored.green("Title: "), yt.title)
     print(colored.green("Author: "), yt.author)
     print(colored.green("Duration: "), convert(yt.length))
-    descriptionChoice = str(input(colored.yellow(
-        "Do you want to see video description? (y/n) ")))
+    descriptionChoice = str(input(
+        "Do you want to see video description? (y/n) "))
 
     if descriptionChoice == "y" or descriptionChoice == "Y":
         print(yt.description)
 
-    downloadChoice = str(input(colored.yellow(
-        "Do you want to download the video? (y/n) ")))
+    downloadChoice = str(input(
+        "Do you want to download the video? (y/n) "))
 
     if downloadChoice == "y" or downloadChoice == "Y":
         print(colored.yellow("Downloading..."))
