@@ -35,7 +35,7 @@ def playlistDownloaderFunc(playlistLink):
         print(colored.yellow("Downloading..."))
         for video in cydlp.videos:
             video.register_on_progress_callback(on_progress)
-            video.streams.get_lowest_resolution().download(
+            video.streams.get_highest_resolution().download(
                 "./download/playlist/{makeDir}".format(makeDir=folderName))
             done = True
 
