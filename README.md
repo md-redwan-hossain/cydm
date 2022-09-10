@@ -1,4 +1,4 @@
-# CYDL: A CLI Based YouTube Video Downloader
+# CYDL: A CLI Based YouTube Video and Playlist Downloader
 
 ### [Download link for executable files (windows and linux)](https://github.com/redwan-hossain/cydl/releases/)
 
