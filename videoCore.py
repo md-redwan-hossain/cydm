@@ -38,7 +38,7 @@ def videoDownloaderFunc(videoLink):
     if downloadChoice == "y" or downloadChoice == "Y":
         print(colored.yellow("Downloading..."))
         downloadProcessor = yt.streams.get_highest_resolution()
-        downloadProcessor.download("./downloads")
+        downloadProcessor.download("./download")
         return True
     elif downloadChoice == "n" or downloadChoice == "N":
         return False

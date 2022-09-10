@@ -1,7 +1,9 @@
-downloads
+download
 __pycache__
 dist
 build
 ytd.spec
 tempCodeRunnerFile.py
 cydl.spec
+cydl-windows.exe
+cydl-linux

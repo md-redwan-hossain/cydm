@@ -18,7 +18,7 @@ def selectionMenu(prompt):
         print(colored.yellow("YouTube Playlist Downloader"))
         link = regexCheckPlaylist()
         if link:
-            playlistProceedOrNot = playlistDownloaderFunc(link)
+            playlistProceedOrNot = playlistProcessor(link)
         else:
             return
 
