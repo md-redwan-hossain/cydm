@@ -2,7 +2,7 @@ import re
 from clint.textui import colored
 
 
-def validateYoutubeLink(url):
+def validateYoutubeVideoLink(url):
     youtube_regex = (
         r'(https?://)?(www\.)?'
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
@@ -12,15 +12,35 @@ def validateYoutubeLink(url):
     return youtube_regex_match
 
 
-def regexCheck():
-    link = str(input("Input the youtube video link: "))
-    if validateYoutubeLink(link):
+def validateYoutubePlaylistLink(url):
+    youtube_regex = (r"^.*(youtu.be\/|list=)([^#\&\?]*).*")
+    youtube_regex_match = bool(re.match(youtube_regex, url))
+    return youtube_regex_match
+
+
+def regexCheckVideo():
+    link = str(input("Enter the youtube video link: "))
+    if validateYoutubeVideoLink(link):
         return link
     else:
         print(colored.red("Link invalid"))
         choice = str(input("Do you want to try again? (y/n) "))
         if choice == "y" or choice == "Y":
-            catch = regexCheck()
+            catch = regexCheckVideo()
+            return catch
+        elif choice == "n" or choice == "N":
+            return False
+
+
+def regexCheckPlaylist():
+    link = str(input("Enter the youtube playlist link: "))
+    if validateYoutubePlaylistLink(link):
+        return link
+    else:
+        print(colored.red("Link invalid"))
+        choice = str(input("Do you want to try again? (y/n) "))
+        if choice == "y" or choice == "Y":
+            catch = regexCheckPlaylist()
             return catch
         elif choice == "n" or choice == "N":
             return False

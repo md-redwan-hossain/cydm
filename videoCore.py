@@ -9,19 +9,20 @@ def again(stream, path):
     againDownloadChoice = str(
         input("Do you want to download another video? (y/n) "))
     if againDownloadChoice == "y" or againDownloadChoice == "Y":
-        linkCheck = regexCheck()
+        linkCheck = regexCheckVideo()
         if linkCheck:
-            downloaderFunc(linkCheck)
+            videoDownloaderFunc(linkCheck)
         else:
             return False
 
 
-def downloaderFunc(video_link):
+def videoDownloaderFunc(videoLink):
     yt = YouTube(
-        video_link,
+        videoLink,
         on_progress_callback=on_progress,
         on_complete_callback=again
     )
+
     print(colored.green("Title: "), yt.title)
     print(colored.green("Author: "), yt.author)
     print(colored.green("Duration: "), convert(yt.length))
