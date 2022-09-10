@@ -25,10 +25,10 @@ def regexCheckVideo():
     else:
         print(colored.red("Link invalid"))
         choice = str(input("Do you want to try again? (y/n) "))
-        if choice == "y" or choice == "Y":
+        if choice.lower() == "y":
             catch = regexCheckVideo()
             return catch
-        elif choice == "n" or choice == "N":
+        elif choice.lower() == "n":
             return False
 
 
@@ -39,8 +39,8 @@ def regexCheckPlaylist():
     else:
         print(colored.red("Link invalid"))
         choice = str(input("Do you want to try again? (y/n) "))
-        if choice == "y" or choice == "Y":
+        if choice.lower() == "y":
             catch = regexCheckPlaylist()
             return catch
-        elif choice == "n" or choice == "N":
+        elif choice.lower() == "n":
             return False

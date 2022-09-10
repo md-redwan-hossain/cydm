@@ -20,15 +20,14 @@ From the cydl.py file, a youtube playlist link comes into playlist processor fun
 '''
 
 
-def success(stream, path):
+def playlistDownloadSuccess(stream, path):
     print(colored.green("\nDownload complete"))
 
 
 def onCompleteAgainOrNot():
-    print("Download completed")
     againplaylistDownloadChoice = str(
         input("Do you want to download another playlist? (y/n) "))
-    if againplaylistDownloadChoice == "y" or againplaylistDownloadChoice == "Y":
+    if againplaylistDownloadChoice.lower() == "y":
         linkCheck = regexCheckPlaylist()
         if linkCheck:
             playlistProcessor(linkCheck)
@@ -42,7 +41,7 @@ def singleVidFromPlaylist(videoLink, folderName):
     videoObj = YouTube(
         videoLink,
         on_progress_callback=on_progress,
-        on_complete_callback=success
+        on_complete_callback=playlistDownloadSuccess
     )
 
     print(colored.green("\nDownloading:"), videoObj.title)
@@ -62,10 +61,10 @@ def playlistProcessor(playlistLink):
     playlistDownloadChoice = str(input(
         "Do you want to download the playlist? (y/n) "))
 
-    if playlistDownloadChoice == "n" or playlistDownloadChoice == "N":
+    if playlistDownloadChoice.lower() == "n":
         return False
 
-    elif playlistDownloadChoice == "y" or playlistDownloadChoice == "Y":
+    elif playlistDownloadChoice.lower() == "y":
         videoLinks = playlistObj.video_urls
         size, check = len(videoLinks), 0
 

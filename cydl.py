@@ -23,7 +23,7 @@ def selectionMenu(prompt):
             return
 
 
-def validate():
+def entryFunc():
     option = input(str("Enter your choice (1/2/3): "))
 
     if option == "1" or option == "2":
@@ -35,8 +35,8 @@ def validate():
     elif option != "1" or option != "2":
         print(colored.red("Invalid selection!"))
         choice = str(input("Do you want to try again? (y/n) "))
-        if choice == "y" or choice == "Y":
-            validate()
+        if choice.lower() == "y":
+            entryFunc()
         else:
             return
 
@@ -46,4 +46,4 @@ print(colored.green("1. Download Video"))
 print(colored.green("2. Download Playlist"))
 print(colored.green("3. Exit"))
 
-validate()
+entryFunc()
