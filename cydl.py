@@ -41,7 +41,7 @@ def validate():
             return
 
 
-print(colored.green("CYDL: A CLI Based YouTube Video Downloader"))
+print(colored.green("CYDL: A CLI Based YouTube Video and Playlist Downloader"))
 print(colored.green("1. Download Video"))
 print(colored.green("2. Download Playlist"))
 print(colored.green("3. Exit"))
