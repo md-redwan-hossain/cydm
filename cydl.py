@@ -1,33 +1,33 @@
-from playlistCore import *
-from videoCore import *
+from playlist_core import *
+from video_core import *
 
 
-def selectionMenu(prompt):
-    videoProceedOrNot = True
-    playlistProceedOrNot = True
+def selection_menu(prompt):
+    video_proceed_or_not = True
+    playlist_proceed_or_not = True
 
-    while prompt == "1" and videoProceedOrNot:
+    while prompt == "1" and video_proceed_or_not:
         print(colored.yellow("YouTube Video Downloader"))
-        link = regexCheckVideo()
+        link = regex_check_video()
         if link:
-            videoProceedOrNot = videoDownloaderFunc(link)
+            video_proceed_or_not = video_ux_func(link)
         else:
             return
 
-    while prompt == "2" and playlistProceedOrNot:
+    while prompt == "2" and playlist_proceed_or_not:
         print(colored.yellow("YouTube Playlist Downloader"))
-        link = regexCheckPlaylist()
+        link = regex_check_playlist()
         if link:
-            playlistProceedOrNot = playlistProcessor(link)
+            playlist_proceed_or_not = playlist_ux_and_processor(link)
         else:
             return
-    #  When false returned from playlistProcessor(), playlistProceedOrNot becomes false and The prompt 2 loop breaks
 
-def entryFunc():
+
+def entry_func():
     option = input(str("Enter your choice (1/2/3): "))
 
     if option == "1" or option == "2":
-        selectionMenu(option)
+        selection_menu(option)
 
     elif option == "3":
         return
@@ -36,7 +36,7 @@ def entryFunc():
         print(colored.red("Invalid selection!"))
         choice = str(input("Do you want to try again? (y/n) "))
         if choice.lower() == "y":
-            entryFunc()
+            entry_func()
         else:
             return
 
@@ -46,4 +46,4 @@ print(colored.green("1. Download Video"))
 print(colored.green("2. Download Playlist"))
 print(colored.green("3. Exit"))
 
-entryFunc()
+entry_func()
