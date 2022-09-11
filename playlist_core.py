@@ -34,6 +34,7 @@ def download_video_from_playlist_func(url, parent_folder_name):
 
 
 def playlist_ux_and_processor(playlistLink):
+    print(colored.yellow("Processing..."))
     playlist_download_complete = False
     playlist_obj = Playlist(playlistLink)
 
