@@ -6,7 +6,7 @@
 
 **Use the following command to run CYDL in your linux terminal:**
 
-`chmod -x cydl-linux && ./cydl-linux`
+`chmod 764 cydl-linux && ./cydl-linux`
 <br><br>
 
 ## Steps to run CYDL from source code:

@@ -39,8 +39,8 @@ def video_downloader_func(url):
             return False
 
 
-def video_ux_func(videoLink):
-    single_video_obj = YouTube(videoLink)
+def video_ux_func(video_link):
+    single_video_obj = YouTube(video_link)
     print("\n")
     print(colored.green("Title: "), single_video_obj.title)
     print(colored.green("Author: "), single_video_obj.author)
@@ -57,6 +57,6 @@ def video_ux_func(videoLink):
         "Do you want to download the video? (y/n) "))
 
     if download_choice.lower() == "y":
-        video_downloader_func(videoLink)
+        video_downloader_func(video_link)
 
     return False
