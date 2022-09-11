@@ -21,7 +21,7 @@ def selectionMenu(prompt):
             playlistProceedOrNot = playlistProcessor(link)
         else:
             return
-
+    #  When false returned from playlistProcessor(), playlistProceedOrNot becomes false and The prompt 2 loop breaks
 
 def entryFunc():
     option = input(str("Enter your choice (1/2/3): "))
