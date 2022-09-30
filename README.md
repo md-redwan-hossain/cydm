@@ -29,3 +29,8 @@
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
 - Then run CYDL by this command: `python3 cydl.py`
+
+
+<a href="https://trackgit.com">
+<img src="https://us-central1-trackgit-analytics.cloudfunctions.net/token/ping/l8odqh0kelvlsqjwh6l8" alt="trackgit-views" />
+</a>
