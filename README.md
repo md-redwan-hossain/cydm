@@ -4,12 +4,12 @@
 
 <br>
 
-**Use the following command to run CYDL in your linux terminal:**
+**Use the following command to run CYDM in your linux terminal:**
 
 `chmod 764 cydl-linux && ./cydl-linux`
 <br><br>
 
-## Steps to run CYDL from source code:
+## Steps to run CYDM from source code:
 
 <br>
 
@@ -28,7 +28,7 @@
 
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
-- Then run CYDL by this command: `python3 cydl.py`
+- Then run CYDM by this command: `python3 cydm.py`
 
 
 <a href="https://trackgit.com">
