@@ -40,7 +40,7 @@ def playlist_ux_and_processor(playlist_link):
 
     playlist_name = playlist_obj.title
     print("\n")
-    print(colored.green("Title: "), playlist_obj.title)
+    print(colored.green("Title: "), playlist_name)
     print(colored.green("Owner: "), playlist_obj.owner)
     print(colored.green("Total videos: "), len(playlist_obj.video_urls))
 
