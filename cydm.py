@@ -1,6 +1,8 @@
 from playlist_core import *
 from video_core import *
 from typing import Union
+import os
+
 
 
 def selection_menu(prompt: str) -> None:
