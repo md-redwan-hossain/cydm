@@ -1,3 +1,9 @@
+args==0.1.0
+Brotli==1.0.9
+certifi==2022.12.7
 clint==0.5.1
+mutagen==1.46.0
+pycryptodomex==3.16.0
 pytube==12.1.0
-yt_dlp==2022.9.1
+websockets==10.4
+yt-dlp==2022.11.11

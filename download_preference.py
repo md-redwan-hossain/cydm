@@ -1,12 +1,12 @@
 class VideoConfig:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__ydl_opts: dict = {
             "format": "best",
             "quiet": True,
             "noplaylist": True,
             "forcetitle": True,
             "allow_unplayable_formats": False,
-            "outtmpl": "./download/%(title)s.%(ext)s",
+            "outtmpl": "./cydm_download/%(title)s.%(ext)s",
         }
 
     @property
@@ -29,11 +29,13 @@ class VideoConfig:
 
 
 class PlaylistConfig(VideoConfig):
+
     def __init__(self, parent_folder_name):
         super().__init__()
 
         self.config.update(
-            {"outtmpl": f"./download/{parent_folder_name}/%(title)s.%(ext)s"}
+            {"outtmpl":
+                rf"./cydm_download/{parent_folder_name}/%(title)s.%(ext)s"}
         )
 
 

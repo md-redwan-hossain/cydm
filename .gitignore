@@ -17,3 +17,5 @@ exception_new.py
 log.txt
 debugger.py
 .vscoode
+venv
+cydm_download
