@@ -1,3 +1,4 @@
 clint
 pytube
 yt-dlp
+GitPython
