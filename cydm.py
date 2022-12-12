@@ -6,6 +6,7 @@ from typing import Union, Any
 import playlist_core
 import video_core
 import warnings
+import updater
 
 warnings.filterwarnings("ignore")
 
@@ -33,7 +34,8 @@ def menu() -> None:
     print(colored.green("CYDL: A CLI Based YouTube Video and Playlist Downloader"))
     print(colored.green("1. Download Video"))
     print(colored.green("2. Download Playlist"))
-    print(colored.yellow("3. Exit"))
+    print(colored.red("3. Exit"))
+    print(colored.yellow("99. Check for CYDM update"))
 
 
 def entry_func() -> None:
@@ -48,7 +50,14 @@ def entry_func() -> None:
             print(colored.yellow("Bye!"))
             exit()
 
-        elif option not in ("1", "2"):
+        elif option == "99":
+            status = updater.run_update_check()
+            if status == True:
+                print(colored.cyan("CYDM updated"))
+            else:
+                print(colored.cyan("CYDM is up to date "))
+
+        elif option not in ("1", "2", "3", "99"):
             print(colored.red("Invalid selection!"))
             print(colored.yellow("Do you want to try again?"))
             choice = validate_selection_input()

@@ -113,14 +113,19 @@ def playlist_processor(playlist_link) -> None:
             else:
                 check_progress += 1
                 if check_progress == playlist_size:
-                    print(colored.cyan("Download of "), end="")
-                    print(colored.yellow(f"{parent_folder_name} "), end="")
-                    if signal_from_downloader_func["download_failed"] == False:
-                        print(colored.cyan("is Completed.\n"))
-                    else:
-                        print(colored.cyan(
-                            "is completed "), end="")
-                        print(colored.red(
-                            "with some errors."))
-                        print(colored.blue(
-                            "Error log is saved in the file -> \"failed_download.log\"\n"))
+                    download_msg(parent_folder_name,
+                                 signal_from_downloader_func)
+
+
+def download_msg(playlist_name: str, signal: dict):
+    print(colored.cyan("Download of "), end="")
+    print(colored.yellow(f"{playlist_name} "), end="")
+    if signal["download_failed"] == False:
+        print(colored.cyan("is Completed.\n"))
+    else:
+        print(colored.cyan(
+            "is completed "), end="")
+        print(colored.red(
+            "with some errors."))
+        print(colored.blue(
+            "Error log is saved in the file -> \"failed_download.log\"\n"))
