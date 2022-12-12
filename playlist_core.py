@@ -115,7 +115,7 @@ def playlist_processor(playlist_link) -> None:
                 if check_progress == playlist_size:
                     print(colored.cyan("Download of "), end="")
                     print(colored.yellow(f"{parent_folder_name} "), end="")
-                    if signal_from_downloader_func["download_failed"] is True:
+                    if signal_from_downloader_func["download_failed"] is False:
                         print(colored.cyan("is Completed.\n"))
                     else:
                         print(colored.cyan(
