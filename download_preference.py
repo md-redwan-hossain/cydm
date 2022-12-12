@@ -5,6 +5,7 @@ class VideoConfig:
             "quiet": True,
             "noplaylist": True,
             "forcetitle": True,
+            "no_warnings": True,
             "allow_unplayable_formats": False,
             "outtmpl": "./cydm_download/%(title)s.%(ext)s",
         }

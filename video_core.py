@@ -1,29 +1,11 @@
-from exception_handler_core import video_link_exception_validate
 from selection_validation import validate_selection_input
 from clint.textui import colored
-from typing import Any, Union
+from datetime import datetime
 from yt_dlp import YoutubeDL
 import download_preference
 
 
-def on_complete_again_download_or_not() -> None:
-
-    print(colored.yellow("Do you want to download another video? "))
-
-    choose_wanna_download_another_video = validate_selection_input()
-
-    if choose_wanna_download_another_video:
-        video_processor: Union[list[Any],
-                               bool] = video_link_exception_validate()
-
-        if video_processor:
-            video_ux_func(video_processor)
-    else:
-        print(colored.yellow("Bye!"))
-        exit()
-
-
-def video_downloader_func(url: str):
+def video_downloader_func(video_name: str, url: str):
     print(colored.yellow("\nDo you want to download subtile (english only)?"))
     subtile_yes_or_not: bool = validate_selection_input()
 
@@ -39,15 +21,22 @@ def video_downloader_func(url: str):
             ydl.download(url)
         except KeyboardInterrupt:
             print(colored.red("\nDownload forcefully stopped\n"))
-            on_complete_again_download_or_not()
+
         except:
-            print(colored.red("Download failed\n"))
+            print(colored.red("Download failed."))
+            print(colored.blue(
+                "Error log is saved in the file -> \"failed_download.log\"\n"))
+
+            date = datetime.now()
+            with open("failed_download.log", "a") as failed:
+                failed.write(date.strftime("[%Y-%m-%d %I:%M:%S %p]\n"))
+                failed.write(f"{video_name}\n")
+                failed.write(f"{url}\n\n")
         else:
             print(colored.cyan("Download complete\n"))
-            on_complete_again_download_or_not()
 
 
-def video_ux_func(video_obj_info_url) -> Union[bool, None]:
+def video_ux_func(video_obj_info_url) -> None:
 
     print("\n")
     for key, value in video_obj_info_url[1].items():
@@ -55,18 +44,13 @@ def video_ux_func(video_obj_info_url) -> Union[bool, None]:
 
     print(colored.yellow("\nDo you want to see the video description?"))
     catch_description_choice: bool = validate_selection_input()
-    if catch_description_choice:
+    if catch_description_choice is True:
         print("\n")
         print(video_obj_info_url[0].description)
         print("\n")
 
     print(colored.yellow("\nDo you want to download the video? "))
     catch_download_choice: bool = validate_selection_input()
-    if catch_download_choice:
-        video_downloader_func(video_obj_info_url[2])
-    else:
-        return False
-    return True
-
-
-# return is received by selection_menu (cydl.py)
+    if catch_download_choice is True:
+        video_downloader_func(
+            video_obj_info_url[1]["Title"], video_obj_info_url[2])

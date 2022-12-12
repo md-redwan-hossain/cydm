@@ -19,3 +19,4 @@ debugger.py
 .vscoode
 venv
 cydm_download
+failed_download.log

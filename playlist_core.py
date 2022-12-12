@@ -1,10 +1,11 @@
-from regex_link_validation import *
-import download_preference
 from selection_validation import validate_selection_input
+from datetime import datetime
+from clint.textui import colored
 from yt_dlp import YoutubeDL
 from pytube import Playlist
+import download_preference
+from pytube import YouTube
 from typing import Union
-import os
 
 
 def playlist_name_fixer(parent_folder_name) -> str:
@@ -22,29 +23,14 @@ def playlist_name_fixer(parent_folder_name) -> str:
     return parent_folder_name
 
 
-def on_complete_again_download_or_not() -> bool:
-    print(colored.yellow("Do you want to download another playlist?"))
-    choose_wanna_download_another_playlist: bool = validate_selection_input()
-
-    if choose_wanna_download_another_playlist:
-        linkCheck = regex_check_playlist()
-        if linkCheck:
-            playlist_ux_and_processor(linkCheck)
-        else:
-            exit()
-
-    return False
-
-
 def playlist_video_downloader(
-        url: str, parent_folder_name: str, subtitle_choice: bool) -> Union[None, bool]:
+        url: str, ydl_opts: dict,
+        playlist_size: int, check_progress: int = 0) -> dict:
 
-    if subtitle_choice:
-        ydl_opts = download_preference.playlist_with_subtitle(
-            parent_folder_name)
-    else:
-        ydl_opts = download_preference.playlist_without_subtitle(
-            parent_folder_name)
+    download_signal = {
+        "forcefully_stopped": False,
+        "download_failed": False,
+    }
 
     with YoutubeDL(ydl_opts) as ydl:
         print(colored.yellow("\nDownloading..."))
@@ -52,21 +38,33 @@ def playlist_video_downloader(
             ydl.download(url)
         except KeyboardInterrupt:
             print(colored.red("\nDownload forcefully stopped\n"))
-            try_another_playlist_after_force_exit: bool = on_complete_again_download_or_not()
-            if try_another_playlist_after_force_exit is False:
-                print(colored.yellow("Bye!"))
-                exit()
+            download_signal["forcefully_stopped"] = True
 
         except:
-            print(colored.red("Download failed\n"))
+
+            print(colored.red(
+                f"Download failed ({check_progress}/{playlist_size})\n"))
+
+            single_video_obj: YouTube = YouTube(url)
+            date = datetime.now()
+            with open("failed_download.log", "a") as failed:
+                failed.write(date.strftime("[%Y-%m-%d %I:%M:%S %p]\n"))
+                failed.write(f"{single_video_obj.title}\n")
+                failed.write(f"{url}\n\n")
+            download_signal["download_failed"] = True
+
         else:
-            print(colored.cyan("Download complete\n"))
-        return None
+            check_progress += 1
+            print(colored.cyan(
+                f"Download complete ({check_progress}/{playlist_size})\n"))
+
+        finally:
+            return download_signal
 
 
-def playlist_ux_and_processor(playlist_link) -> bool:
+def playlist_ux_func(playlist_link) -> Union[tuple, None]:
     print(colored.yellow("Processing..."))
-    playlist_download_complete = False
+
     playlist_obj = Playlist(playlist_link)
 
     playlist_name = playlist_obj.title
@@ -83,23 +81,46 @@ def playlist_ux_and_processor(playlist_link) -> bool:
 
         print(colored.yellow("\nDo you want to download subtile? (english only)"))
         subtile_yes_or_not: bool = validate_selection_input()
+        if subtile_yes_or_not is True:
+            ydl_opts = download_preference.playlist_with_subtitle(
+                parent_folder_name)
+        else:
+            ydl_opts = download_preference.playlist_without_subtitle(
+                parent_folder_name)
 
-        video_links = playlist_obj.video_urls
-        size, check = len(video_links), 0
+        return playlist_obj, parent_folder_name, ydl_opts
+    return None
+
+
+def playlist_processor(playlist_link) -> None:
+    data_from_ux_func: Union[tuple, None] = playlist_ux_func(playlist_link)
+
+    if data_from_ux_func is not None:
+        playlist_obj = data_from_ux_func[0]
+        parent_folder_name: str = data_from_ux_func[1]
+        ydl_opts: dict = data_from_ux_func[2]
+
+        video_links: list = playlist_obj.video_urls
+        playlist_size: int = len(video_links)
+        check_progress: int = 0
 
         for url in video_links:
-            playlist_video_downloader(
-                url, parent_folder_name, subtile_yes_or_not)
+            signal_from_downloader_func: dict = playlist_video_downloader(
+                url, ydl_opts, playlist_size, check_progress)
 
-            check += 1
-            if check == size:
-                playlist_download_complete = True
-
-    if playlist_download_complete:
-        catch = on_complete_again_download_or_not()
-        if catch:
-            return True
-        else:
-            return False
-
-    return False
+            if signal_from_downloader_func["forcefully_stopped"] is True:
+                break
+            else:
+                check_progress += 1
+                if check_progress == playlist_size:
+                    print(colored.cyan("Download of "), end="")
+                    print(colored.yellow(f"{parent_folder_name} "), end="")
+                    if signal_from_downloader_func["download_failed"] is True:
+                        print(colored.cyan("is Completed.\n"))
+                    else:
+                        print(colored.cyan(
+                            "is completed "), end="")
+                        print(colored.red(
+                            "with some errors."))
+                        print(colored.blue(
+                            "Error log is saved in the file -> \"failed_download.log\"\n"))
