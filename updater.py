@@ -50,7 +50,7 @@ class FileManagement(DirectoryManagement):
 
 class RepoManagement(FileManagement):
     def clone_repo(self):
-        print(colored.yellow("Downloading repo\n"))
+        print(colored.yellow("\n\nDownloading repo"))
         git.Repo.clone_from(
             "https://github.com/redwan-hossain/cydm.git", f"{self.BASE_DIR}/new_files", branch='main', depth="1")
         print(colored.yellow("Download finished\n"))
