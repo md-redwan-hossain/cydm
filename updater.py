@@ -70,7 +70,7 @@ class HashingManagement(RepoManagement):
 
     def hash_manager_new(self):
         for i in self.files_new:
-            hex = self.hash_maker(f"{self.BASE_DIR}/{i}")
+            hex = self.hash_maker(f"{self.BASE_DIR}/new_files/{i}")
             self.hash_new[i] = f"{hex}"
 
 
