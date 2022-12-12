@@ -1,13 +1,15 @@
-# CYDM: A CLI Based YouTube Video and Playlist Download Manager
+## CYDM: A CLI Based YouTube Video and Playlist Download Manager
 
+<!--
 ### [Download link for executable files (windows and linux)](https://github.com/redwan-hossain/cydl/releases/)
 
+ 
 <br>
 
 **Use the following command to run CYDM in your linux terminal:**
 
 `chmod 764 cydl-linux && ./cydl-linux`
-<br><br>
+<br><br> -->
 
 ## Steps to run CYDM from source code:
 
