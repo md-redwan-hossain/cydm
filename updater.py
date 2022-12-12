@@ -1,3 +1,4 @@
+from clint.textui import colored
 import hashlib
 import shutil
 import os
@@ -49,10 +50,10 @@ class FileManagement(DirectoryManagement):
 
 class RepoManagement(FileManagement):
     def clone_repo(self):
-        print("Downloading repo")
+        print(colored.yellow("Downloading repo\n"))
         git.Repo.clone_from(
             "https://github.com/redwan-hossain/cydm.git", f"{self.BASE_DIR}/new_files", branch='main', depth="1")
-        print("Download finished")
+        print(colored.yellow("Download finished\n"))
         self.clean_unnecessary_files()
 
 
