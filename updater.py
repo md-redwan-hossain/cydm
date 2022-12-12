@@ -85,7 +85,7 @@ class HashingCompare(HashingManagement):
 class UpdateCYDM(HashingCompare):
     def remove_current_files(self):
         for i in self.cydm_files:
-            os.remove(f"{self.BASE_DIR}{i}")
+            os.remove(f"{self.BASE_DIR}/{i}")
 
     def update_from_new_files(self):
         for i in self.cydm_files:
