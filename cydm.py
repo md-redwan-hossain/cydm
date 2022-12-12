@@ -17,13 +17,13 @@ def selection_menu(prompt: str) -> None:
         video_processor: Union[list[Any],
                                bool] = exception_handler_core.video_link_exception_validate()
 
-        if video_processor is not False:
+        if video_processor != False:
             video_core.video_ux_func(video_processor)
 
     elif prompt == "2":
         print(colored.yellow("YouTube Playlist Downloader"))
         link = regex_link_validation.regex_check_playlist()
-        if link:
+        if link != False:
             playlist_core.playlist_processor(link)
 
     entry_func()

@@ -44,13 +44,13 @@ def video_ux_func(video_obj_info_url) -> None:
 
     print(colored.yellow("\nDo you want to see the video description?"))
     catch_description_choice: bool = validate_selection_input()
-    if catch_description_choice is True:
+    if catch_description_choice == True:
         print("\n")
         print(video_obj_info_url[0].description)
         print("\n")
 
     print(colored.yellow("\nDo you want to download the video? "))
     catch_download_choice: bool = validate_selection_input()
-    if catch_download_choice is True:
+    if catch_download_choice == True:
         video_downloader_func(
             video_obj_info_url[1]["Title"], video_obj_info_url[2])

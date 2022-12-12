@@ -81,7 +81,7 @@ def playlist_ux_func(playlist_link) -> Union[tuple, None]:
 
         print(colored.yellow("\nDo you want to download subtile? (english only)"))
         subtile_yes_or_not: bool = validate_selection_input()
-        if subtile_yes_or_not is True:
+        if subtile_yes_or_not == True:
             ydl_opts = download_preference.playlist_with_subtitle(
                 parent_folder_name)
         else:
@@ -108,14 +108,14 @@ def playlist_processor(playlist_link) -> None:
             signal_from_downloader_func: dict = playlist_video_downloader(
                 url, ydl_opts, playlist_size, check_progress)
 
-            if signal_from_downloader_func["forcefully_stopped"] is True:
+            if signal_from_downloader_func["forcefully_stopped"] == True:
                 break
             else:
                 check_progress += 1
                 if check_progress == playlist_size:
                     print(colored.cyan("Download of "), end="")
                     print(colored.yellow(f"{parent_folder_name} "), end="")
-                    if signal_from_downloader_func["download_failed"] is False:
+                    if signal_from_downloader_func["download_failed"] == False:
                         print(colored.cyan("is Completed.\n"))
                     else:
                         print(colored.cyan(
