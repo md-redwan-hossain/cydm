@@ -54,6 +54,7 @@ def entry_func() -> None:
             status = updater.run_update_check()
             if status == True:
                 print(colored.cyan("CYDM updated"))
+                print(colored.yellow("Launch CYDM again to get new changes.\n"))
             else:
                 print(colored.cyan("CYDM is up to date\n"))
                 entry_func()
