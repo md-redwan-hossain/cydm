@@ -70,7 +70,7 @@ def playlist_ux_func(playlist_link) -> Union[tuple, None]:
     playlist_name = playlist_obj.title
     print("\n")
     print(colored.green("Title: "), playlist_name)
-    print(colored.green("Owner: "), playlist_obj.owner)
+    print(colored.green("Channel Name: "), playlist_obj.owner)
     print(colored.green("Total videos: "), len(playlist_obj.video_urls))
 
     print(colored.yellow("\nDo you want to download the playlist?"))
