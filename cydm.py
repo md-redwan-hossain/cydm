@@ -41,7 +41,7 @@ def menu() -> None:
 def entry_func() -> None:
     try:
         menu()
-        option = input(str("Enter your choice (1/2/3): "))
+        option = input(str("Enter your choice (1/2/3/99): "))
 
         if option in ("1", "2"):
             selection_menu(option)
