@@ -1,8 +1,8 @@
 from selection_validation import validate_selection_input
 from clint.textui import colored
+from typing import Union, Any
 import exception_handler_core
 import regex_link_validation
-from typing import Union, Any
 import playlist_core
 import video_core
 import warnings
@@ -55,7 +55,8 @@ def entry_func() -> None:
             if status == True:
                 print(colored.cyan("CYDM updated"))
             else:
-                print(colored.cyan("CYDM is up to date "))
+                print(colored.cyan("CYDM is up to date\n"))
+                entry_func()
 
         elif option not in ("1", "2", "3", "99"):
             print(colored.red("Invalid selection!"))
