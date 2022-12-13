@@ -4,7 +4,7 @@ from typing import Union
 import re
 
 
-def validate_youtube_playlist_link(url):
+def validate_youtube_playlist_link(url) -> bool:
     youtube_regex_playlist = (r"^.*(youtu.be\/|list=)([^#\&\?]*).*")
     youtube_regex_match = bool(re.match(youtube_regex_playlist, url))
     return youtube_regex_match
@@ -15,11 +15,11 @@ def error_handler(link):
     return True if validator == True else False
 
 
-def regex_check_playlist() -> Union[str, None]:
+def regex_check_playlist() -> Union[str, bool]:
 
     while True:
         link = str(input("Enter the youtube playlist link: "))
-        validate = error_handler(link)
+        validate = validate_youtube_playlist_link(link)
         if validate == True:
             return link
 
@@ -31,4 +31,4 @@ def regex_check_playlist() -> Union[str, None]:
                 break
             else:
                 continue
-    return None
+    return False
