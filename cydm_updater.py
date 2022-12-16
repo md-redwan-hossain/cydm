@@ -90,9 +90,11 @@ class HashingManagement(FileManagement):
 
 class HashingCompare(HashingManagement):
 
-    def compare_hash(self):
+    def compare_hash_for_mismatch(self):
         for file_name, hex in self.hash_old.items():
             if self.hash_new.get(file_name) != hex:
+                return True
+            else:
                 return False
 
 
@@ -127,7 +129,7 @@ def run_update_check() -> bool:
 def run_hash_check(update_obj):
     update_obj.hash_manager_old()
     update_obj.hash_manager_new()
-    update_obj.mismatched_hash = update_obj.compare_hash()
+    update_obj.mismatched_hash = update_obj.compare_hash_for_mismatch()
 
     update_obj.manage_directory()\
         if not update_obj.mismatched_hash\
