@@ -1,31 +1,30 @@
 from selection_validation import validate_selection_input
 from clint.textui import colored
 from typing import Union, Any
-import exception_handler_core
+from exception_handler_core import video_link_exception_validate
 import regex_link_validation
 import playlist_core
 import video_core
 import warnings
-import updater
+import cydm_updater
 
 warnings.filterwarnings("ignore")
 
 
-def selection_menu(prompt: str) -> None:
+def selection_menu(prompt: str):
 
     if prompt == "1":
         print(colored.yellow("YouTube Video Downloader"))
-        video_processor: Union[list[Any],
-                               bool] = exception_handler_core.video_link_exception_validate()
+        verified_data: Union[bool, list] = video_link_exception_validate()
 
-        if video_processor != False:
-            video_core.video_ux_func(video_processor)
+        if isinstance(verified_data, list):
+            video_core.video_data_parse(verified_data)
 
     elif prompt == "2":
         print(colored.yellow("YouTube Playlist Downloader"))
         link = regex_link_validation.regex_check_playlist()
-        if link != False:
-            playlist_core.playlist_processor(link)
+        if link:
+            playlist_core.playlist_data_parse(link)
 
     entry_func()
 
@@ -41,7 +40,7 @@ def menu() -> None:
 def entry_func() -> None:
     try:
         menu()
-        option = input(str("Enter your choice (1/2/3/99): "))
+        option: str = input(str("Enter your choice (1/2/3/99): "))
 
         if option in ("1", "2"):
             selection_menu(option)
@@ -51,7 +50,7 @@ def entry_func() -> None:
             exit()
 
         elif option == "99":
-            status = updater.run_update_check()
+            status = cydm_updater.run_update_check()
             if status == True:
                 print(colored.cyan("CYDM updated"))
                 print(colored.yellow("Launch CYDM again to get new changes.\n"))

@@ -1,8 +1,7 @@
-import typing
 from pytube import YouTube, exceptions
 from clint.textui import colored
-import time_converter
 from typing import Any, Union
+import string_formatter
 
 
 def error_message(error_type) -> None:
@@ -19,7 +18,7 @@ def video_exception_handler(url: str) -> Union[list[Any], bool]:
         video_info: dict = {
             "Title": str(single_video_obj.title),
             "Channel Name": str(single_video_obj.author),
-            "Duration": str(time_converter.convert_sec_to_readable(single_video_obj.length)),
+            "Duration": str(string_formatter.convert_sec_to_readable(single_video_obj.length)),
         }
 
         if video_info["Duration"] == "0:00:00":
