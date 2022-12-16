@@ -1,7 +1,7 @@
 ## CYDM: A CLI Based YouTube Video and Playlist Download Manager
 
 <!--
-### [Download link for executable files (windows and linux)](https://github.com/redwan-hossain/cydl/releases/)
+#### [Download link for executable files (windows and linux)](https://github.com/redwan-hossain/cydl/releases/)
 
  
 <br>
@@ -19,7 +19,9 @@
 
 - For ubuntu linux: `sudo apt install python3`
 
-- For other linux distros, use your desired package manager and install **python3**
+- For arch linux: `sudo pacman -S --needed python`
+
+- For other linux distros, use your desired package manager and install `python3`
 
 - For Windows: [Download and install from here](https://www.python.org/downloads/)
   <br> <br>
