@@ -120,7 +120,7 @@ def run_update_check() -> bool:
 
     return True\
         if update_obj.mismatched_file_count\
-        and update_obj.mismatched_hash\
+        or update_obj.mismatched_hash\
         else False
 
 
