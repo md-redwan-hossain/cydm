@@ -61,7 +61,7 @@ class FileManagement(RepoManagement):
             if os.path.isfile(f"{self.BASE_DIR}/new_files/{file}"):
                 self.files_new.append(file)
 
-        self.files_new = sorted(os.listdir(f"{self.BASE_DIR}/new_files"))
+        self.files_new = sorted(self.files_new)
 
     def check_file_amount_mismatch(self):
         if len(self.cydm_files) != len(self.files_new):
@@ -79,7 +79,7 @@ class HashingManagement(FileManagement):
 
     def hash_manager_old(self):
         for i in self.cydm_files:
-            hex = self.hash_maker(f"{self.BASE_DIR}/{i}")
+            hex = self.hash_maker(f"{self.BASE_DIR}/old_files/{i}")
             self.hash_old[i] = f"{hex}"
 
     def hash_manager_new(self):
@@ -94,8 +94,6 @@ class HashingCompare(HashingManagement):
         for file_name, hex in self.hash_old.items():
             if self.hash_new.get(file_name) != hex:
                 return True
-            else:
-                return False
 
 
 class UpdateCYDM(HashingCompare):
@@ -117,13 +115,15 @@ def run_update_check() -> bool:
     update_obj.update_new_file_list()
     update_obj.mismatched_file_count = update_obj.check_file_amount_mismatch()
 
-    perform_update(update_obj) if update_obj.mismatched_file_count\
-        else run_hash_check(update_obj)
+    if update_obj.mismatched_file_count:
+        perform_update(update_obj)
+    else:
+        run_hash_check(update_obj)
 
-    return True\
-        if update_obj.mismatched_file_count\
-        or update_obj.mismatched_hash\
-        else False
+    if update_obj.mismatched_file_count or update_obj.mismatched_hash:
+        return True
+    else:
+        return False
 
 
 def run_hash_check(update_obj):
@@ -131,9 +131,10 @@ def run_hash_check(update_obj):
     update_obj.hash_manager_new()
     update_obj.mismatched_hash = update_obj.compare_hash_for_mismatch()
 
-    update_obj.manage_directory()\
-        if not update_obj.mismatched_hash\
-        else perform_update(update_obj)
+    if update_obj.mismatched_hash:
+        perform_update(update_obj)
+    else:
+        update_obj.manage_directory()
 
 
 def perform_update(update_obj):
