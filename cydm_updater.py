@@ -18,10 +18,12 @@ class ResourceManagement:
         self.cydm_files_ignored: list = ["trial.py", "failed_download.log"]
 
         for file in os.listdir(self.BASE_DIR):
-            if os.path.isfile(f"{self.BASE_DIR}/{file}"):
-                self.cydm_files.append(file)
-            else:
+            if os.path.isdir(f"{self.BASE_DIR}/{file}"):
                 self.cydm_files_ignored.append(file)
+
+        for file in os.listdir(self.BASE_DIR):
+            if file not in self.cydm_files_ignored:
+                self.cydm_files.append(file)
 
         self.cydm_files = sorted(self.cydm_files)
 
