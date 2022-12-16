@@ -1,4 +1,3 @@
-download
 __pycache__
 dist
 build
@@ -7,13 +6,7 @@ tempCodeRunnerFile.py
 cydl.spec
 cydl-windows.exe
 cydl-linux
-experiment.zip
 trial.py
-buildozer.spec
-test
-py.zip
-video_core_backup.py
-exception_new.py
 log.txt
 debugger.py
 .vscoode
