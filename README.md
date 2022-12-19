@@ -3,13 +3,15 @@
 <!--
 #### [Download link for executable files (windows and linux)](https://github.com/redwan-hossain/cydl/releases/)
 
- 
+
 <br>
 
 **Use the following command to run CYDM in your linux terminal:**
 
 `chmod 764 cydl-linux && ./cydl-linux`
 <br><br> -->
+
+![cydm in action](./cydm_in_action.png)
 
 ## Steps to run CYDM from source code:
 
@@ -33,7 +35,6 @@
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
 - Then run CYDM by this command: `python3 cydm.py`
-
 
 <a href="https://trackgit.com">
 <img src="https://us-central1-trackgit-analytics.cloudfunctions.net/token/ping/l8odqh0kelvlsqjwh6l8" alt="trackgit-views" />
