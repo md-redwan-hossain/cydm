@@ -1,13 +1,13 @@
 from clint.textui import colored
+from pathlib import Path
 import hashlib
 import shutil
-import os
 import git
 
 
 class ResourceManagement:
     def __init__(self) -> None:
-        self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        self.BASE_DIR = Path(__file__).parent.resolve()
         self.files_new: list = []
         self.hash_old: dict = {}
         self.hash_new: dict = {}
@@ -17,28 +17,28 @@ class ResourceManagement:
         self.cydm_files: list = []
         self.cydm_files_ignored: list = ["trial.py", "failed_download.log"]
 
-        for file in os.listdir(self.BASE_DIR):
-            if os.path.isdir(f"{self.BASE_DIR}/{file}"):
-                self.cydm_files_ignored.append(file)
+        for file in Path(self.BASE_DIR).iterdir():
+            if file.is_dir():
+                self.cydm_files_ignored.append(file.name)
 
-        for file in os.listdir(self.BASE_DIR):
-            if file not in self.cydm_files_ignored:
-                self.cydm_files.append(file)
+        for file in Path(self.BASE_DIR).iterdir():
+            if file.name not in self.cydm_files_ignored:
+                self.cydm_files.append(file.name)
 
         self.cydm_files = sorted(self.cydm_files)
 
 
 class DirectoryManagement(ResourceManagement):
     def manage_directory(self):
-        if os.path.exists(f"{self.BASE_DIR}/old_files"):
+        if Path(f"{self.BASE_DIR}/old_files").exists():
             shutil.rmtree(f"{self.BASE_DIR}/old_files")
         else:
-            os.mkdir(f"{self.BASE_DIR}/old_files")
+            Path(f"{self.BASE_DIR}/old_files").mkdir()
 
-        if os.path.exists(f"{self.BASE_DIR}/new_files"):
+        if Path(f"{self.BASE_DIR}/new_files").exists():
             shutil.rmtree(f"{self.BASE_DIR}/new_files")
         else:
-            os.mkdir(f"{self.BASE_DIR}/new_files")
+            Path(f"{self.BASE_DIR}/new_files").mkdir()
 
 
 class RepoManagement(DirectoryManagement):
@@ -57,9 +57,9 @@ class FileManagement(RepoManagement):
                         f"{self.BASE_DIR}/old_files/{i}")
 
     def update_new_file_list(self):
-        for file in os.listdir(f"{self.BASE_DIR}/new_files"):
-            if os.path.isfile(f"{self.BASE_DIR}/new_files/{file}"):
-                self.files_new.append(file)
+        for file in Path(f"{self.BASE_DIR}/new_files").iterdir():
+            if file.is_file():
+                self.files_new.append(file.name)
 
         self.files_new = sorted(self.files_new)
 
@@ -99,7 +99,8 @@ class HashingCompare(HashingManagement):
 class UpdateCYDM(HashingCompare):
     def remove_current_files(self):
         for i in self.cydm_files:
-            os.remove(f"{self.BASE_DIR}/{i}")
+            Path(f"{self.BASE_DIR}/{i}").unlink()
+
 
     def update_from_new_files(self):
         for i in self.cydm_files:
