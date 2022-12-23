@@ -30,7 +30,7 @@
 
 **After ensuring python in your system, follow the following steps:**
 
-- Clone the repo or download the source codes.
+- Clone the repo by `git clone https://github.com/redwan-hossain/cydm.git` or download the source codes.
 
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
