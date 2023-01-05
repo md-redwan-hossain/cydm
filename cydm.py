@@ -1,12 +1,12 @@
+from exception_handler_core import video_link_exception_validate
 from selection_validation import validate_selection_input
 from clint.textui import colored
-from typing import Union, Any
-from exception_handler_core import video_link_exception_validate
 import regex_link_validation
+from typing import Union
 import playlist_core
+import cydm_updater
 import video_core
 import warnings
-import cydm_updater
 
 warnings.filterwarnings("ignore")
 

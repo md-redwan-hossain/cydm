@@ -3,7 +3,7 @@ from typing import Union, Any
 from pytube import Playlist
 from pytube import YouTube
 import download_preference
-import string_formatter
+from string_formatter import name_fixer
 import download_engine
 import ux_engine
 
@@ -31,7 +31,7 @@ def playlist_downloader_func_step_1(initiate, playlist_data) -> None:
 
     selection_data: dict = initiate.selection_choice("playlist")
     if selection_data.get("download"):
-        playlist_data.update(title=string_formatter.name_fixer(
+        playlist_data.update(title=name_fixer(
             playlist_data.get("title")))
 
     if selection_data.get("subtitle"):
@@ -50,9 +50,9 @@ def playlist_downloader_func_step_2(playlist_data, yt_dlp_config) -> None:
     check_progress: int = 0
 
     for url in playlist_data.get("urls"):
-        video_title: str = YouTube(url).title
+        video_title = name_fixer(YouTube(url).title)
         initiate_download = download_engine.PlaylistDownloadEngine(
-            video_title, url, yt_dlp_config, playlist_data.get("total_videos"), check_progress)
+            playlist_data.get("title"), video_title, url, yt_dlp_config, playlist_data.get("total_videos"), check_progress)
 
         signal_from_initiate_download = initiate_download.downloader()
 
@@ -68,7 +68,7 @@ def playlist_downloader_func_step_2(playlist_data, yt_dlp_config) -> None:
 def download_msg(playlist_name: str, signal: dict):
     print(colored.cyan("Download of "), end="")
     print(colored.yellow(f"{playlist_name} "), end="")
-    if signal.get("download_failed"):
+    if not signal.get("download_failed"):
         print(colored.cyan("is Completed.\n"))
     else:
         print(colored.cyan(

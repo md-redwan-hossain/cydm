@@ -4,16 +4,8 @@ def convert_sec_to_readable(seconds):
     return "%d:%02d:%02d" % (hour, minute, second)
 
 
-def name_fixer(name) -> str:
-    letter_bin = list(name)
-    for i in range(0, len(letter_bin), 1):
-        if letter_bin[i] == "(":
-            letter_bin[i] = "["
-        elif letter_bin[i] == ")":
-            letter_bin[i] = "]"
-        elif letter_bin[i] == "\\":
-            letter_bin[i] = ","
-        elif letter_bin[i] == "/":
-            letter_bin[i] = ","
-    name = "".join(letter_bin)
-    return name
+def name_fixer(video_title) -> str:
+    remove_punctuation_map = dict((ord(char), None) for char in r'\/*?:"<>|')
+    return video_title.translate(remove_punctuation_map)
+
+
