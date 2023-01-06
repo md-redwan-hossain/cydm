@@ -54,27 +54,12 @@ class PlaylistDownloadEngine(BaseDownloadEngine):
         self.playlist_size = playlist_size
         self.playlist_name = playlist_name
         self.check_progress = check_progress
+
         self.PLAYLIST_DIR = Path(self.BASE_DOWNLOAD_DIR).joinpath(
             playlist_name).resolve()
 
-    def video_file_renamer(self, serial_no: int) -> None:
-        TEMP_FILES = list(Path(self.PLAYLIST_DIR).glob("temp_vid_download.*"))
-        for file in TEMP_FILES:
-            file_str_path = str(file)
-            file_extension_index_start: int = file_str_path.rfind(".")
-            file_extension = file_str_path[file_extension_index_start:]
-            dst_path = None
-
-            if file_str_path.rfind(".en") != -1:
-                dst_path = Path(self.PLAYLIST_DIR).joinpath(
-                    f"{serial_no}. {self.video_title}.en{file_extension}")
-            else:
-                dst_path = Path(self.PLAYLIST_DIR).joinpath(
-                    f"{serial_no}. {self.video_title}{file_extension}")
-            try:
-                file.rename(dst_path)
-            except FileExistsError:
-                pass
+        self.yt_dlp_config.update(
+            outtmpl=f'{Path(self.PLAYLIST_DIR).joinpath(f"{self.check_progress+1}. %(title)s.%(ext)s")}')
 
     def downloader(self):
         super().downloader()
@@ -84,7 +69,7 @@ class PlaylistDownloadEngine(BaseDownloadEngine):
 
         elif not self.download_signal.get("download_failed") \
                 and not self.download_signal.get("forcefully_stopped"):
-            self.video_file_renamer(self.check_progress+1)
+
             self.check_progress += 1
             print(colored.cyan(
                 f"Download complete ({self.check_progress}/{self.playlist_size})\n"))

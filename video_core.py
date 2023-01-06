@@ -1,5 +1,5 @@
+from download_preference import download_with_subtitle, download_without_subtitle
 from typing import Any, Union
-import download_preference
 import download_engine
 import ux_engine
 
@@ -20,13 +20,13 @@ def video_data_parse(verified_data: list) -> None:
 def video_downloader_func(initiate, video_data) -> None:
 
     initiate.show_task_data()
-    
+
     selection_data: dict = initiate.selection_choice("video")
 
     if selection_data.get("subtitle"):
-        yt_dlp_config = download_preference.video_with_subtitle()
+        yt_dlp_config = download_with_subtitle()
     else:
-        yt_dlp_config = download_preference.video_without_subtitle()
+        yt_dlp_config = download_without_subtitle()
     initiate_download = download_engine.SingleVideoDownloadEngine(
         video_data.get("title"), video_data.get("url"), yt_dlp_config)
 

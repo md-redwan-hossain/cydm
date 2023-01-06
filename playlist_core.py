@@ -1,9 +1,9 @@
+from download_preference import download_with_subtitle, download_without_subtitle
+from string_formatter import name_fixer
 from clint.textui import colored
 from typing import Union, Any
 from pytube import Playlist
 from pytube import YouTube
-import download_preference
-from string_formatter import name_fixer
 import download_engine
 import ux_engine
 
@@ -35,11 +35,9 @@ def playlist_downloader_func_step_1(initiate, playlist_data) -> None:
             playlist_data.get("title")))
 
     if selection_data.get("subtitle"):
-        yt_dlp_config = download_preference.playlist_with_subtitle(
-            playlist_data.get("title"))
+        yt_dlp_config = download_with_subtitle()
     else:
-        yt_dlp_config = download_preference.playlist_without_subtitle(
-            playlist_data.get("title"))
+        yt_dlp_config = download_without_subtitle()
 
     if selection_data.get("download"):
         playlist_downloader_func_step_2(playlist_data, yt_dlp_config)

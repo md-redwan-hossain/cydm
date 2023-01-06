@@ -15,3 +15,4 @@ venv
 cydm_download
 failed_download.log
 .idea
+.mypy_cache
