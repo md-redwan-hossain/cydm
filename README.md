@@ -11,7 +11,7 @@
 `chmod 764 cydl-linux && ./cydl-linux`
 <br><br> -->
 
-![cydm in action](./cydm_in_action.png)
+![cydm in action](./cydm_snap.png)
 
 ## Steps to run CYDM from source code:
 
@@ -19,9 +19,9 @@
 
 **Make sure python is installed in your machine. If not,**
 
-- For ubuntu linux: `sudo apt install python3`
+- For ubuntu linux: `sudo apt install python3 python3-pip`
 
-- For arch linux: `sudo pacman -S --needed python`
+- For arch linux: `sudo pacman -S --needed python python-pip`
 
 - For other linux distros, use your desired package manager and install `python3`
 
@@ -30,11 +30,11 @@
 
 **After ensuring python in your system, follow the following steps:**
 
-- Clone the repo by `git clone https://github.com/redwan-hossain/cydm.git` or download the source codes.
+- Clone the repo by `git clone --depth 1 https://github.com/redwan-hossain/cydm.git` or download the source codes.
 
 - Install the dependencies first: `pip3 install -r requirements.txt`
 
-- Then run CYDM by this command: `python3 cydm.py`
+- Enter the cloned repo folder, then run CYDM by this command: `python3 cydm.py`
 
 <a href="https://trackgit.com">
 <img src="https://us-central1-trackgit-analytics.cloudfunctions.net/token/ping/l8odqh0kelvlsqjwh6l8" alt="trackgit-views" />
