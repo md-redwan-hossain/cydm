@@ -53,8 +53,11 @@ class RepoManagement(DirectoryManagement):
 class FileManagement(RepoManagement):
     def copy_old(self):
         for i in self.cydm_files:
-            shutil.copy(f"{self.BASE_DIR}/{i}",
-                        f"{self.BASE_DIR}/old_files/{i}")
+            try:
+                shutil.copy(f"{self.BASE_DIR}/{i}",
+                            f"{self.BASE_DIR}/old_files/{i}")
+            except FileNotFoundError:
+                pass
 
     def update_new_file_list(self):
         for file in Path(f"{self.BASE_DIR}/new_files").iterdir():
@@ -100,7 +103,6 @@ class UpdateCYDM(HashingCompare):
     def remove_current_files(self):
         for i in self.cydm_files:
             Path(f"{self.BASE_DIR}/{i}").unlink()
-
 
     def update_from_new_files(self):
         for i in self.cydm_files:
