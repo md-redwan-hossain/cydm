@@ -43,7 +43,7 @@ def menu() -> None:
     print(colored.green("2. Download Playlist"))
     print(colored.red("3. Exit"))
     print(colored.yellow("UPD. Check for CYDM update"))
-    print(colored.cyan("CLR. Clear record of previously completed download"))
+    print(colored.cyan("CLR. Clear download logs"))
 
 
 def entry_func() -> None:
