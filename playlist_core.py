@@ -3,7 +3,6 @@ from string_formatter import name_fixer
 from clint.textui import colored
 from typing import Union, Any
 from pytube import Playlist
-from pytube import YouTube
 import download_engine
 import ux_engine
 
@@ -48,9 +47,8 @@ def playlist_downloader_func_step_2(playlist_data, yt_dlp_config) -> None:
     check_progress: int = 0
 
     for url in playlist_data.get("urls"):
-        video_title = name_fixer(YouTube(url).title)
         initiate_download = download_engine.PlaylistDownloadEngine(
-            playlist_data.get("title"), video_title, url, yt_dlp_config, playlist_data.get("total_videos"), check_progress)
+            playlist_data.get("title"), url, yt_dlp_config, playlist_data.get("total_videos"), check_progress)
 
         signal_from_initiate_download = initiate_download.downloader()
 

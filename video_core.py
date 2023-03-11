@@ -28,7 +28,7 @@ def video_downloader_func(initiate, video_data) -> None:
     else:
         yt_dlp_config = download_without_subtitle()
     initiate_download = download_engine.SingleVideoDownloadEngine(
-        video_data.get("title"), video_data.get("url"), yt_dlp_config)
+        video_data.get("url"), yt_dlp_config)
 
     if selection_data.get("download"):
         initiate_download.downloader()

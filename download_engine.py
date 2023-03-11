@@ -5,9 +5,9 @@ from pathlib import Path
 
 
 class BaseDownloadEngine:
-    def __init__(self, video_title: str, video_url: str, yt_dlp_config: dict) -> None:
+    def __init__(self, video_url: str, yt_dlp_config: dict) -> None:
         self.video_url: str = video_url
-        self.video_title: str = video_title
+
         self.yt_dlp_config: dict = yt_dlp_config
         self.BASE_DOWNLOAD_DIR = Path().cwd().joinpath("cydm_download").resolve()
 
@@ -26,13 +26,12 @@ class BaseDownloadEngine:
                 self.download_signal.update(forcefully_stopped=True)
             except:
                 self.download_signal.update(download_failed=True)
-                failed_download_logger.create_error_log(
-                    self.video_title, self.video_url)
+                failed_download_logger.create_error_log(self.video_url)
 
 
 class SingleVideoDownloadEngine(BaseDownloadEngine):
-    def __init__(self, video_title: str, video_url: str, yt_dlp_config: dict) -> None:
-        super().__init__(video_title, video_url, yt_dlp_config)
+    def __init__(self, video_url: str, yt_dlp_config: dict) -> None:
+        super().__init__(video_url, yt_dlp_config)
 
     def downloader(self):
         super().downloader()
@@ -47,9 +46,9 @@ class SingleVideoDownloadEngine(BaseDownloadEngine):
 
 
 class PlaylistDownloadEngine(BaseDownloadEngine):
-    def __init__(self, playlist_name: str, video_title: str, video_url: str, yt_dlp_config: dict,
+    def __init__(self, playlist_name: str, video_url: str, yt_dlp_config: dict,
                  playlist_size: int, check_progress: int = 0) -> None:
-        super().__init__(video_title, video_url, yt_dlp_config)
+        super().__init__(video_url, yt_dlp_config)
 
         self.playlist_size = playlist_size
         self.playlist_name = playlist_name
