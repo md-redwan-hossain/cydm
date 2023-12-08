@@ -7,6 +7,6 @@
 **/.idea
 **/.vscode
 **/input.txt
-**/.vscode
 **/cydm-dependency
 **/cydm-downloads
+**/*/log
