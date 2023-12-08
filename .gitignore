@@ -1,0 +1,12 @@
+**/.vs
+**/bin
+**/obj
+**/*.user
+**/Logs/*
+.idea
+**/.idea
+**/.vscode
+**/input.txt
+**/.vscode
+**/cydm-dependency
+**/cydm-downloads
