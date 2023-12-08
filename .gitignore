@@ -9,4 +9,4 @@
 **/input.txt
 **/cydm-dependency
 **/cydm-downloads
-**/*/log
+**/*.log
