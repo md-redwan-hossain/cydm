@@ -52,6 +52,7 @@ public class VideoDownloadController
 
     public async Task Download()
     {
+        
         var lastUpdateTime = DateTime.Now;
         var progress = new Progress<DownloadProgress>(p => VideoView.PrintDownloadProgressInfo(ref lastUpdateTime, p));
         var cts = new CancellationTokenSource();

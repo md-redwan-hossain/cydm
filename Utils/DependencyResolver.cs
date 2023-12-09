@@ -1,3 +1,5 @@
+using CYDM.Views;
+
 namespace CYDM.Utils;
 
 public static class DependencyResolver
@@ -12,7 +14,9 @@ public static class DependencyResolver
 
     public static async Task Resolve()
     {
+        DependencyResolveView.PrintBeforeResolveInfo();
         CreateNonExistingDir();
         await YoutubeDLSharp.Utils.DownloadBinaries(skipExisting: true, directoryPath: DependencyDir);
+        DependencyResolveView.PrintAfterResolveInfo();
     }
 }
